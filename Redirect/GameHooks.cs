@@ -338,7 +338,7 @@ namespace Redirect {
                     ToastGui.ShowError("Invalid target.");
                 }
 
-                return false;
+                return TryActionHook.Original(this_ptr, action_type, id, target, param, origin, unk, location);
             }
 
             // Successfully changed target

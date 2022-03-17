@@ -17,7 +17,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <OutputPath>C:\Users\Mark\AppData\Roaming\XIVLauncher\devPlugins\Redirect\</OutputPath>
+    <!--<OutputPath>C:\Users\Mark\AppData\Roaming\XIVLauncher\devPlugins\Redirect\</OutputPath>-->
   </PropertyGroup>
 
   <PropertyGroup>

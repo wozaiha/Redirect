@@ -27,7 +27,7 @@ namespace Redirect {
         private void Initialize() {
             Sheet = Services.DataManager.GetExcelSheet<ActionInfo>()!;
             Role = Sheet.Where(a => a.IsRoleAction && a.ClassJobLevel != 0 && a.HasOptionalTargeting()).ToList();
-            JobInfo = Services.DataManager.GetExcelSheet<JobInfo>(Dalamud.ClientLanguage.English)!.Where(j => j.Role > 0 && j.ItemSoulCrystal.Value?.RowId > 0).ToList();
+            JobInfo = Services.DataManager.GetExcelSheet<JobInfo>()!.Where(j => j.Role > 0 && j.ItemSoulCrystal.Value?.RowId > 0).ToList();
 
             foreach (var job in JobInfo) {
                 Jobs[job] = Sheet.Where(a => a.UsableByJob(job) && (a.HasOptionalTargeting() || a.IsActionAllowed())).ToList();

@@ -59,19 +59,19 @@ namespace Redirect {
             }
 
             if (ImGui.BeginMenuBar()) {
-                if (ImGui.BeginMenu("Options")) {
+                if (ImGui.BeginMenu("选项")) {
 
-                    ImGui.Text("Global settings:");
+                    ImGui.Text("全局选项:");
 
                     ImGui.Dummy(new Vector2(-1, 1));
 
                     bool range_fail = Configuration.SilentRangeFailure;
-                    if (ImGui.Checkbox("Skip targets out of range", ref range_fail)) {
+                    if (ImGui.Checkbox("忽略范围外的目标", ref range_fail)) {
                         Configuration.SilentRangeFailure = range_fail;
                     }
 
                     bool friendly_mo = Configuration.DefaultMouseoverFriendly;
-                    if (ImGui.Checkbox("Treat all friendly actions as mouseovers", ref friendly_mo)) {
+                    if (ImGui.Checkbox("对治疗/增益技能启用鼠标指向", ref friendly_mo)) {
                         Configuration.DefaultMouseoverFriendly = friendly_mo;
                     }
 
@@ -79,19 +79,19 @@ namespace Redirect {
                         ImGui.Dummy(new Vector2(1, -1));
                         ImGui.SameLine();
                         bool friendly_mo_model = Configuration.DefaultModelMouseoverFriendly;
-                        if (ImGui.Checkbox("Include friendly target models", ref friendly_mo_model)) {
+                        if (ImGui.Checkbox("包括友方模型指向", ref friendly_mo_model)) {
                             Configuration.DefaultModelMouseoverFriendly = friendly_mo_model;
                         }
                         ImGui.Dummy(new Vector2(1, -1));
                         ImGui.SameLine();
                         bool cursor_mo = Configuration.DefaultCursorMouseover;
-                        if (ImGui.Checkbox("Include ground targets at cursor", ref cursor_mo)) {
+                        if (ImGui.Checkbox("包括地面技能", ref cursor_mo)) {
                             Configuration.DefaultCursorMouseover = cursor_mo;
                         }
                     }
 
                     bool hostile_mo = Configuration.DefaultMouseoverHostile;
-                    if (ImGui.Checkbox("Treat all hostile actions as mouseovers", ref hostile_mo)) {
+                    if (ImGui.Checkbox("对伤害/减益技能启用鼠标指向", ref hostile_mo)) {
                         Configuration.DefaultMouseoverHostile = hostile_mo;
                     }
 
@@ -99,29 +99,29 @@ namespace Redirect {
                         ImGui.Dummy(new Vector2(1, -1));
                         ImGui.SameLine();
                         bool hostile_mo_model = Configuration.DefaultModelMouseoverHostile;
-                        if (ImGui.Checkbox("Include hostile target models", ref hostile_mo_model)) {
+                        if (ImGui.Checkbox("包括敌方模型指向", ref hostile_mo_model)) {
                             Configuration.DefaultModelMouseoverHostile = hostile_mo_model;
                         }
                     }
 
                     ImGui.Dummy(new Vector2(-1, 1));
 
-                    ImGui.Text("Allow these actions to queue:");
+                    ImGui.Text("允许以下技能插入队列:");
 
                     ImGui.Dummy(new Vector2(-1, 1));
 
                     bool queue_ground = Configuration.QueueGroundActions;
-                    if (ImGui.Checkbox("Ground targeted actions", ref queue_ground)) {
+                    if (ImGui.Checkbox("地面技能", ref queue_ground)) {
                         Configuration.QueueGroundActions = queue_ground;
                     }
 
                     bool macro_queue = Configuration.EnableMacroQueueing;
-                    if (ImGui.Checkbox("Actions from macros", ref macro_queue)) {
+                    if (ImGui.Checkbox("宏", ref macro_queue)) {
                         Configuration.EnableMacroQueueing = macro_queue;
                     }
 
                     bool sprint_queue = Configuration.QueueSprint;
-                    if (ImGui.Checkbox("Sprint", ref sprint_queue)) {
+                    if (ImGui.Checkbox("冲刺", ref sprint_queue)) {
                         if(sprint_queue != Configuration.QueueSprint) {
                             GameHooks.UpdateSprintQueueing(sprint_queue);
                             Configuration.QueueSprint = sprint_queue;
@@ -129,7 +129,7 @@ namespace Redirect {
                     }
 
                     bool item_queue = Configuration.QueuePotions;
-                    if (ImGui.Checkbox("Potions", ref item_queue)) {
+                    if (ImGui.Checkbox("药水", ref item_queue)) {
                         if (item_queue != Configuration.QueuePotions) {
                             GameHooks.UpdatePotionQueueing(item_queue);
                             Configuration.QueuePotions = item_queue;
@@ -146,19 +146,19 @@ namespace Redirect {
 
             if (ImGui.BeginChild("abilities", new Vector2(ImGui.GetContentRegionAvail().X * 0.20f, -1))) {        
                     
-                    if (ImGui.Selectable(" Role Actions", SelectedRoleActions)) {
+                    if (ImGui.Selectable(" 职能技能", SelectedRoleActions)) {
                         SelectedRoleActions = true;
                         SelectedJob = null!;
                     }
 
                     foreach (var job in Jobs) { 
-                        if (ImGui.Selectable($" {job.Abbreviation}", SelectedJob == job)) {
+                        if (ImGui.Selectable($" {job.Name}", SelectedJob == job)) {
                             SelectedJob = job;
                             SelectedRoleActions = false;
                         }
                     }
 
-                ImGui.EndChild();
+                    ImGui.EndChild();
             }
 
             ImGui.SameLine();
